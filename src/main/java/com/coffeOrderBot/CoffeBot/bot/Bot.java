@@ -17,7 +17,7 @@ public class Bot extends TelegramLongPollingBot {
 
     private final BotConfig CONFIG;
 
-    private final CommandContainer COMMAND_CONTAINER/* = new CommandContainer(new SendMessageServiceImpl(this), repository)*/;
+    private final CommandContainer COMMAND_CONTAINER;
 
     @Autowired
     public Bot(BotConfig config, ClientRepository repository, CommandContainer container) {
