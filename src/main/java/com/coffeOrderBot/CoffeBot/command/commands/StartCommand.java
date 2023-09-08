@@ -51,6 +51,7 @@ public class StartCommand implements Command {
             Client client = new Client();
             client.setId(msg.getChatId());
             client.setFirstName(msg.getChat().getFirstName());
+            client.setSecondName(msg.getChat().getLastName());
             client.setUserName(msg.getChat().getUserName());
             client.setRegisterDay(new Timestamp(System.currentTimeMillis()));
 
