@@ -1,5 +1,6 @@
 package com.coffeOrderBot.CoffeBot.bot;
 
+import com.coffeOrderBot.CoffeBot.command.CallbackContainer;
 import com.coffeOrderBot.CoffeBot.command.CommandContainer;
 import com.coffeOrderBot.CoffeBot.config.BotConfig;
 import com.coffeOrderBot.CoffeBot.model.ClientRepository;
@@ -19,17 +20,22 @@ public class Bot extends TelegramLongPollingBot {
 
     private final CommandContainer COMMAND_CONTAINER;
 
+    private final CallbackContainer CALLBACK_CONTAINER;
+
+
     @Autowired
-    public Bot(BotConfig config, ClientRepository repository, CommandContainer container) {
+    public Bot(BotConfig config, ClientRepository repository, CommandContainer commandContainer, CallbackContainer callbackContainer) {
         this.CONFIG = config;
         this.repository = repository;
-        this.COMMAND_CONTAINER = container;
+        this.COMMAND_CONTAINER = commandContainer;
+        this.CALLBACK_CONTAINER = callbackContainer;
     }
 
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
             String messageText = update.getMessage().getText().trim();
+            System.out.println("Message: " + messageText);
             if (messageText.startsWith("/")) {
                 String commandIdentifier = messageText.split(" ")[0].toLowerCase();
                 COMMAND_CONTAINER.retrieveCommand(commandIdentifier).execute(update);
@@ -37,9 +43,10 @@ public class Bot extends TelegramLongPollingBot {
         }
         if (update.hasCallbackQuery()) {
             String callbackData = update.getCallbackQuery().getData();
-            System.out.println(callbackData);
-            COMMAND_CONTAINER.retrieveCommand(callbackData).execute(update);
+            System.out.println("Callback" + callbackData);
+            CALLBACK_CONTAINER.retrieveCallback(callbackData).execute(update);
         }
+
     }
 
     @Override
@@ -53,3 +60,4 @@ public class Bot extends TelegramLongPollingBot {
     }
 
 }
+

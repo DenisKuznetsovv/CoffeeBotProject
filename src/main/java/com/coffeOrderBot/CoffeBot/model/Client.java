@@ -1,6 +1,5 @@
 package com.coffeOrderBot.CoffeBot.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,6 +23,15 @@ public class Client {
 
     @Column(name = "RegisterDay")
     private Timestamp registerDay;
+
+    @Column(name = "Favorite_drink")
+    private String favorite_drink;
+
+    @Column(name = "Volume")
+    private String volume;
+
+    @Column(name = "Comment")
+    private String comment;
 
     public Client(Long id, String userName, String firstName, String secondName, Timestamp registerDay) {
         this.id = id;
@@ -58,6 +66,30 @@ public class Client {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getFavorite_drink() {
+        return favorite_drink;
+    }
+
+    public void setFavorite_drink(String favorite_drink) {
+        this.favorite_drink = favorite_drink;
+    }
+
+    public String getVolume() {
+        return volume;
+    }
+
+    public void setVolume(String volume) {
+        this.volume = volume;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     @Override

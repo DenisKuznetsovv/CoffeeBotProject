@@ -18,8 +18,8 @@ import java.util.Arrays;
 @Service
 public class SendMessageServiceImpl implements SendMessageService {
 
-
     private final Bot bot;
+
     @Lazy
     @Autowired
     public SendMessageServiceImpl(Bot bot) {
@@ -60,7 +60,7 @@ public class SendMessageServiceImpl implements SendMessageService {
         }
     }
 
-    public void sendMessageWithReplyKeyboardMarkup(String chatId, String messageText, ReplyKeyboardMarkup replyKeyboardMarkup){
+    public void sendMessageWithReplyKeyboardMarkup(String chatId, String messageText, ReplyKeyboardMarkup replyKeyboardMarkup) {
         SendMessage message = new SendMessage();
         message.setText(messageText);
         message.setChatId(chatId);

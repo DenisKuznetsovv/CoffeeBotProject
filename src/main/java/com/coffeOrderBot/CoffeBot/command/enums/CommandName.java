@@ -2,11 +2,12 @@ package com.coffeOrderBot.CoffeBot.command.enums;
 
 public enum CommandName {
     START("/start"),
-    ORDER_FAVORITE_DRINK("/orderFavoriteDrink"),
-    SHOW_BARISTA("/showBarista"),
-    HELP("/help"),
-    FEEDBACK("/feedback"),
-    SET_FAVORITE_DRINK("/setFavoriteDrink");
+    ORDER_FAVORITE_DRINK("Заказать любимый напиток"),
+    HELP("Помощь"),
+    FEEDBACK("Оставить отзыв"),
+    SET_FAVORITE_DRINK("Изменить любимый напиток"),
+    START_FOR_OWNER("/password");
+
 
 
     private final String commandName;

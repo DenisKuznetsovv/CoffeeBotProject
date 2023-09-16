@@ -1,9 +1,10 @@
-package com.coffeOrderBot.CoffeBot.service.keyboards;
+package com.coffeOrderBot.CoffeBot.keyboards;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import static com.coffeOrderBot.CoffeBot.command.enums.CommandName.*;
 import static com.coffeOrderBot.CoffeBot.command.enums.DrinkButtons.*;
+import static com.coffeOrderBot.CoffeBot.command.enums.VolumeButtons.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class InlineKeyboardMarkupCollection {
         return inlineKeyboardMarkup;
     }
 
-    public static InlineKeyboardMarkup getMenu() {
+    public static InlineKeyboardMarkup setDrink() {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInlineKeyboard = new ArrayList<>();
         List<InlineKeyboardButton> row = new ArrayList<>();
@@ -96,6 +97,49 @@ public class InlineKeyboardMarkupCollection {
 
         inlineKeyboardMarkup.setKeyboard(rowsInlineKeyboard);
 
+
+        return inlineKeyboardMarkup;
+    }
+    public static InlineKeyboardMarkup setVolume(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInlineKeyboard = new ArrayList<>();
+        List<InlineKeyboardButton> row = new ArrayList<>();
+        InlineKeyboardButton button = new InlineKeyboardButton();
+
+        button.setText(L_020.getButtonText());
+        button.setCallbackData(L_020.getCallback());
+        row.add(button);
+        rowsInlineKeyboard.add(row);
+        button = new InlineKeyboardButton();
+        row = new ArrayList<>();
+
+
+        button.setText(L_025.getButtonText());
+        button.setCallbackData(L_025.getCallback());
+        row.add(button);
+        rowsInlineKeyboard.add(row);
+        button = new InlineKeyboardButton();
+        row = new ArrayList<>();
+
+        button.setText(L_030.getButtonText());
+        button.setCallbackData(L_030.getCallback());
+        row.add(button);
+        rowsInlineKeyboard.add(row);
+        button = new InlineKeyboardButton();
+        row = new ArrayList<>();
+
+        button.setText(L_035.getButtonText());
+        button.setCallbackData(L_035.getCallback());
+        row.add(button);
+        rowsInlineKeyboard.add(row);
+        button = new InlineKeyboardButton();
+        row = new ArrayList<>();
+
+        button.setText(L_040.getButtonText());
+        button.setCallbackData(L_040.getCallback());
+        row.add(button);
+
+        inlineKeyboardMarkup.setKeyboard(rowsInlineKeyboard);
 
         return inlineKeyboardMarkup;
     }
