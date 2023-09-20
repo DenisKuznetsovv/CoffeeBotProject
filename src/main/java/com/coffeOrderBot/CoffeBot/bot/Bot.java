@@ -8,7 +8,13 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import java.util.Arrays;
+
+import static com.coffeOrderBot.CoffeBot.settings.LIST_OF_COMMAND.*;
 
 @Log4j2
 @Component
@@ -29,6 +35,12 @@ public class Bot extends TelegramLongPollingBot {
         this.repository = repository;
         this.COMMAND_CONTAINER = commandContainer;
         this.CALLBACK_CONTAINER = callbackContainer;
+        try {
+            this.execute(new SetMyCommands(listOfCommands, new BotCommandScopeDefault(), null));
+        } catch (TelegramApiException e) {
+            log.warn("Exception: " + e.getMessage() + "\n From: " + Arrays.toString(e.getStackTrace()));
+        }
+
     }
 
     @Override
@@ -43,7 +55,7 @@ public class Bot extends TelegramLongPollingBot {
         }
         if (update.hasCallbackQuery()) {
             String callbackData = update.getCallbackQuery().getData();
-            System.out.println("Callback" + callbackData);
+            System.out.println("Callback: " + callbackData);
             CALLBACK_CONTAINER.retrieveCallback(callbackData).execute(update);
         }
 

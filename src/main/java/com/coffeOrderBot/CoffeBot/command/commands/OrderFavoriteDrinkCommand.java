@@ -24,11 +24,10 @@ public class OrderFavoriteDrinkCommand implements Command {
         Long chatId = update.getMessage().getChatId();
         Optional<Client> clientOptional = repository.findById(chatId);
         Client client = clientOptional.orElse(new Client());
-        repository.findById(client.getId());
 
-        System.out.println("Diagnostic");
+
         sendMessageService.sendMessage(String.valueOf(-1001939600944L), "Кофееее заказааан!!!! From:" +
-                repository.findById(client.getId()));
+                client.getOrderInformation());
 
     }
 }

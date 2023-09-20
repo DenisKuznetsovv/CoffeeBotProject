@@ -3,7 +3,7 @@ package com.coffeOrderBot.CoffeBot.command.commands;
 import com.coffeOrderBot.CoffeBot.model.Client;
 import com.coffeOrderBot.CoffeBot.model.ClientRepository;
 import com.coffeOrderBot.CoffeBot.service.SendMessageService;
-import com.coffeOrderBot.CoffeBot.keyboards.InlineKeyboardMarkupCollection;
+import com.coffeOrderBot.CoffeBot.settings.InlineKeyboardMarkupCollection;
 import lombok.extern.log4j.Log4j2;
 import org.telegram.telegrambots.meta.api.objects.Update;
 

@@ -1,4 +1,4 @@
-package com.coffeOrderBot.CoffeBot.command.enums;
+package com.coffeOrderBot.CoffeBot.settings.enums;
 
 public enum VolumeButtons {
     L_020("200 мл", "200ml"),

@@ -8,9 +8,7 @@ import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.coffeOrderBot.CoffeBot.command.enums.CommandName.*;
-import static com.coffeOrderBot.CoffeBot.command.enums.DrinkButtons.*;
-import static com.coffeOrderBot.CoffeBot.command.enums.VolumeButtons.*;
+import static com.coffeOrderBot.CoffeBot.settings.enums.CommandName.*;
 
 @Component
 public class CommandContainer {

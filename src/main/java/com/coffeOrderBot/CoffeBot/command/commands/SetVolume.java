@@ -3,7 +3,7 @@ package com.coffeOrderBot.CoffeBot.command.commands;
 import com.coffeOrderBot.CoffeBot.model.Client;
 import com.coffeOrderBot.CoffeBot.model.ClientRepository;
 import com.coffeOrderBot.CoffeBot.service.SendMessageService;
-import com.coffeOrderBot.CoffeBot.keyboards.ReplyKeyboardMarkupCollection;
+import com.coffeOrderBot.CoffeBot.settings.ReplyKeyboardMarkupCollection;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -39,9 +39,12 @@ public class SetVolume implements Command {
         sendMessageService.sendMessage(String.valueOf(chatId), "Остается только добавить комментарий к заказу. ");
         Thread.sleep(2000);
 
-        sendMessageService.sendMessage(String.valueOf(chatId), "Его можно написать в свободной форме в любой момент и он сохранится. Например написать:" + " \"С корицей и погорячее\" или \"Буду через пять минут готовьте сразу, пусть не много остынет\"");
+        sendMessageService.sendMessage(String.valueOf(chatId), "Его можно написать в свободной форме. Например написать:" + " \"С корицей и погорячее\" или \"Буду через пять минут готовьте сразу, пусть не много остынет\"");
         Thread.sleep(2000);
 
-        sendMessageService.sendMessageWithReplyKeyboardMarkup(String.valueOf(chatId), "Конец регистрации, наколдую вам пару кнопок для заказа напитка и его изменения", ReplyKeyboardMarkupCollection.getBasicKeyboard());
+        sendMessageService.sendMessageWithReplyKeyboardMarkup(String.valueOf(chatId)
+                ,"Конец регистрации, оставлю для вас пару кнопок для комментариев."
+                , ReplyKeyboardMarkupCollection.getBasicKeyboard());
+
     }
 }

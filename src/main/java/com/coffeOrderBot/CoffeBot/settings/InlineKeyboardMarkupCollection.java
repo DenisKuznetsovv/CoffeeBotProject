@@ -1,10 +1,10 @@
-package com.coffeOrderBot.CoffeBot.keyboards;
+package com.coffeOrderBot.CoffeBot.settings;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import static com.coffeOrderBot.CoffeBot.command.enums.CommandName.*;
-import static com.coffeOrderBot.CoffeBot.command.enums.DrinkButtons.*;
-import static com.coffeOrderBot.CoffeBot.command.enums.VolumeButtons.*;
+import static com.coffeOrderBot.CoffeBot.settings.enums.CommandName.*;
+import static com.coffeOrderBot.CoffeBot.settings.enums.DrinkButtons.*;
+import static com.coffeOrderBot.CoffeBot.settings.enums.VolumeButtons.*;
 
 import java.util.ArrayList;
 import java.util.List;

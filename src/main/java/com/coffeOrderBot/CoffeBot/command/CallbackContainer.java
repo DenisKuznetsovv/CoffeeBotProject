@@ -7,9 +7,9 @@ import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.coffeOrderBot.CoffeBot.command.enums.CommandName.*;
-import static com.coffeOrderBot.CoffeBot.command.enums.DrinkButtons.*;
-import static com.coffeOrderBot.CoffeBot.command.enums.VolumeButtons.*;
+import static com.coffeOrderBot.CoffeBot.settings.enums.CommandName.*;
+import static com.coffeOrderBot.CoffeBot.settings.enums.DrinkButtons.*;
+import static com.coffeOrderBot.CoffeBot.settings.enums.VolumeButtons.*;
 
 @Component
 public class CallbackContainer {
@@ -20,7 +20,7 @@ public class CallbackContainer {
     @Autowired
     public CallbackContainer(SendMessageService sendMessageService, ClientRepository repository) {
         callbackMap = ImmutableMap.<String, Command>builder()
-                .put(SET_FAVORITE_DRINK.getCommandName(), new SetFavoriteDrinkCommand(sendMessageService, repository))
+//                .put(SET_FAVORITE_DRINK.getCommandName(), new SetFavoriteDrinkCommand(sendMessageService, repository))
                 .put(CAPPUCCINO.getCallbackData(), new SetDrink(sendMessageService, repository))
                 .put(AMERICANO.getCallbackData(), new SetDrink(sendMessageService, repository))
                 .put(LATTE.getCallbackData(), new SetDrink(sendMessageService, repository))

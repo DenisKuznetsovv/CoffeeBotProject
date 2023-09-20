@@ -103,6 +103,13 @@ public class Client {
                 '}';
     }
 
+    public String getOrderInformation(){
+        return "Имя: " + firstName + "\n" +
+                "Заказ: " + "\n" +
+                favorite_drink + " " + volume + " " + comment;
+
+    }
+
     public String getSecondName() {
         return secondName;
     }
