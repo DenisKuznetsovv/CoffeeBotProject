@@ -143,4 +143,18 @@ public class InlineKeyboardMarkupCollection {
 
         return inlineKeyboardMarkup;
     }
+
+//    public static InlineKeyboardMarkup invoice(){
+//        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+//        List<List<InlineKeyboardButton>> rowsInlineKeyboard = new ArrayList<>();
+//        List<InlineKeyboardButton> row = new ArrayList<>();
+//        InlineKeyboardButton button = new InlineKeyboardButton("Оплатить")
+//
+//        button.setText("Оплатить");
+//        button.setCallbackData("Оплатить");
+//
+//
+//
+//        return
+//    }
 }

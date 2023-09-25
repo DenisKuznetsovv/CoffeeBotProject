@@ -25,9 +25,9 @@ public class OrderFavoriteDrinkCommand implements Command {
         Optional<Client> clientOptional = repository.findById(chatId);
         Client client = clientOptional.orElse(new Client());
 
-
-        sendMessageService.sendMessage(String.valueOf(-1001939600944L), "Кофееее заказааан!!!! From:" +
-                client.getOrderInformation());
+        sendMessageService.sendInvoice(String.valueOf(chatId), client.getFavorite_drink(), client.getVolume(),"somePayload");
+    }
+    public void sendOrderToChat(){
 
     }
 }

@@ -4,13 +4,17 @@ import com.coffeOrderBot.CoffeBot.command.CallbackContainer;
 import com.coffeOrderBot.CoffeBot.command.CommandContainer;
 import com.coffeOrderBot.CoffeBot.config.BotConfig;
 import com.coffeOrderBot.CoffeBot.model.ClientRepository;
+import com.coffeOrderBot.CoffeBot.model.DrinkRepository;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.AnswerPreCheckoutQuery;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
+import org.telegram.telegrambots.meta.api.objects.payments.PreCheckoutQuery;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.Arrays;
 
@@ -20,7 +24,9 @@ import static com.coffeOrderBot.CoffeBot.settings.LIST_OF_COMMAND.*;
 @Component
 public class Bot extends TelegramLongPollingBot {
 
-    private ClientRepository repository;
+    private ClientRepository clientRepository;
+
+    private DrinkRepository drinkRepository;
 
     private final BotConfig CONFIG;
 
@@ -30,9 +36,11 @@ public class Bot extends TelegramLongPollingBot {
 
 
     @Autowired
-    public Bot(BotConfig config, ClientRepository repository, CommandContainer commandContainer, CallbackContainer callbackContainer) {
+    public Bot(BotConfig config, ClientRepository clientRepository, CommandContainer commandContainer,
+               CallbackContainer callbackContainer, DrinkRepository drinkRepository) {
+        this.clientRepository = clientRepository;
+        this.drinkRepository = drinkRepository;
         this.CONFIG = config;
-        this.repository = repository;
         this.COMMAND_CONTAINER = commandContainer;
         this.CALLBACK_CONTAINER = callbackContainer;
         try {
@@ -42,7 +50,7 @@ public class Bot extends TelegramLongPollingBot {
         }
 
     }
-
+    @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -57,6 +65,13 @@ public class Bot extends TelegramLongPollingBot {
             String callbackData = update.getCallbackQuery().getData();
             System.out.println("Callback: " + callbackData);
             CALLBACK_CONTAINER.retrieveCallback(callbackData).execute(update);
+        }
+        if (update.hasPreCheckoutQuery()){
+            PreCheckoutQuery preCheckoutQuery = update.getPreCheckoutQuery();
+            //Здесь добавить if(проверку по стоп-листу)
+            this.execute(new AnswerPreCheckoutQuery(preCheckoutQuery.getId(), true));
+            new SendOrderToChat().execute();
+
         }
 
     }

@@ -1,9 +1,10 @@
 package com.coffeOrderBot.CoffeBot.command.commands;
 
 import com.coffeOrderBot.CoffeBot.model.ClientRepository;
-import com.coffeOrderBot.CoffeBot.settings.InlineKeyboardMarkupCollection;
 import com.coffeOrderBot.CoffeBot.service.SendMessageService;
+import com.coffeOrderBot.CoffeBot.settings.InlineKeyboardMarkupCollection;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
 import static com.coffeOrderBot.CoffeBot.settings.enums.Emoji.*;
 
 public class SetFavoriteDrinkCommand implements Command {
@@ -20,9 +21,8 @@ public class SetFavoriteDrinkCommand implements Command {
     @Override
     public void execute(Update update) {
         String message = COFFEE.getEmoji() + "Меню кофейни:";
-        sendMessageService.sendMessageWithInlineKeyboardMarkup(String.valueOf(update.getMessage().getChatId())
-                , message
-                , InlineKeyboardMarkupCollection.setDrink());
+        String chatId = String.valueOf(update.getMessage().getChatId());
+        sendMessageService.sendMessageWithInlineKeyboardMarkup(chatId, message, InlineKeyboardMarkupCollection.setDrink());
 
     }
 }

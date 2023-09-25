@@ -14,6 +14,6 @@ public class StartForOwner implements Command {
     @Override
     public void execute(Update update) {
         String chatId = update.getMessage().getChatId().toString();
-        sendMessageService.sendMessage(chatId, "Привет из чата!!!");
+        sendMessageService.setChatIdForOrders(chatId);
     }
 }
