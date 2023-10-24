@@ -2,12 +2,12 @@ package com.coffeOrderBot.CoffeBot.command.commands;
 
 import com.coffeOrderBot.CoffeBot.model.Client;
 import com.coffeOrderBot.CoffeBot.model.ClientRepository;
-import com.coffeOrderBot.CoffeBot.model.Drink;
-import com.coffeOrderBot.CoffeBot.model.DrinkRepository;
+import com.coffeOrderBot.CoffeBot.model.DrinkMenuRepository;
 import com.coffeOrderBot.CoffeBot.service.SendMessageService;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import static com.coffeOrderBot.CoffeBot.settings.enums.Emoji.*;
 
 import java.sql.Timestamp;
 import java.util.Optional;
@@ -15,9 +15,9 @@ import java.util.Optional;
 @Log4j2
 public class StartCommand implements Command {
 
-    private ClientRepository repository;
+    private ClientRepository clientRepository;
 
-    private DrinkRepository drinkRepository;
+    private DrinkMenuRepository drinkRepository;
 
     private final SendMessageService sendMessageService;
 
@@ -28,24 +28,20 @@ public class StartCommand implements Command {
     private static final String START_MESSAGE_3 = "А теперь давай узнаем твой любимый напиток. ";
 
 
-    public StartCommand(SendMessageService sendMessageService, ClientRepository clientRepository, DrinkRepository drinkRepository) {
+    public StartCommand(SendMessageService sendMessageService, ClientRepository clientRepository, DrinkMenuRepository drinkRepository) {
         this.sendMessageService = sendMessageService;
-        this.repository = clientRepository;
+        this.clientRepository = clientRepository;
         this.drinkRepository = drinkRepository;
     }
 
     public void execute(Update update) {
         registerUser(update);
-
-        Optional<Drink> optional = drinkRepository.findById(2);
-        Drink drink = optional.get();
-        System.out.println(drink);
     }
 
     @SneakyThrows
     private void registerUser(Update update) {
         Long chatId = update.getMessage().getChatId();
-        if (repository.findById(chatId).isEmpty()) {
+        if (!clientRepository.existsById(chatId)) {
             log.info("Новый пользователь: " + update.getMessage().getChat().getUserName() + "||"
                     + update.getMessage().getChat().getFirstName());
             sendMessageService.sendMessage(update.getMessage().getChatId().toString(), START_MESSAGE_1);
@@ -55,19 +51,20 @@ public class StartCommand implements Command {
             sendMessageService.sendMessage(update.getMessage().getChatId().toString()
                     , START_MESSAGE_3);
             Client client = new Client();
-            client.setId(chatId);
+            client.setClient_id(chatId);
             client.setFirstName(update.getMessage().getChat().getFirstName());
             client.setSecondName(update.getMessage().getChat().getLastName());
             client.setUserName(update.getMessage().getChat().getUserName());
             client.setRegisterDay(new Timestamp(System.currentTimeMillis()));
 
-            repository.save(client);
-            new SetFavoriteDrinkCommand(sendMessageService, repository).execute(update);
+            clientRepository.save(client);
+            new SelectFavoriteDrinkCommand(sendMessageService, clientRepository, drinkRepository).execute(update);
         } else {
-            Optional<Client> optional = repository.findById(chatId);
+            Optional<Client> optional = clientRepository.findById(chatId);
             Client client = optional.get();
-            sendMessageService.sendMessage(update.getMessage().getChatId().toString(), "Ваш сохраненный любимый напиток:\n" +
-            client.getInformOfDrink());
+            sendMessageService.sendMessage(update.getMessage().getChatId().toString(), "Кажется мы уже знакомы. " +
+                    "Ваш любимый напиток:\n" +
+            COFFEE + " " + client.getInformOfDrink());
         }
     }
 }

@@ -6,17 +6,15 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity(name = "drinks")
 @RequiredArgsConstructor
 @Getter
 @Setter
-@ToString
-public class Drink {
+public class DrinkMenu {
 
     @Id
-    private Integer id;
+    private Long drink_id;
 
     @Column(name = "name")
     private String name;
@@ -29,6 +27,12 @@ public class Drink {
 
     @Column(name = "milk_type")
     private String milkType;
+
+    @Column(name = "is_available")
+    private Boolean isAvailable;
+
+    @Column(name = "menu_type")
+    private String menuType;
 
 
 }

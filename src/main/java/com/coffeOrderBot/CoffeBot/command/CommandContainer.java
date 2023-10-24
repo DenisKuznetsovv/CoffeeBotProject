@@ -1,9 +1,9 @@
 package com.coffeOrderBot.CoffeBot.command;
 
-import com.coffeOrderBot.CoffeBot.command.commands.SetFavoriteDrinkCommand;
+import com.coffeOrderBot.CoffeBot.command.commands.SelectFavoriteDrinkCommand;
 import com.coffeOrderBot.CoffeBot.command.commands.*;
 import com.coffeOrderBot.CoffeBot.model.ClientRepository;
-import com.coffeOrderBot.CoffeBot.model.DrinkRepository;
+import com.coffeOrderBot.CoffeBot.model.DrinkMenuRepository;
 import com.coffeOrderBot.CoffeBot.service.SendMessageService;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +19,19 @@ public class CommandContainer {
     private final Command setComment;
 
     @Autowired
-    public CommandContainer(SendMessageService sendMessageService, ClientRepository clientRepository, DrinkRepository drinkRepository) {
+    public CommandContainer(SendMessageService sendMessageService, ClientRepository clientRepository, DrinkMenuRepository drinkRepository) {
         commandMap = ImmutableMap.<String, Command>builder()
                 .put(START.getCommandName(), new StartCommand(sendMessageService, clientRepository, drinkRepository))
-                .put(START_FOR_OWNER.getCommandName(), new StartForOwner(sendMessageService))
-                .put(ORDER_FAVORITE_DRINK.getCommandName(), new OrderFavoriteDrinkCommand(sendMessageService, clientRepository))
+                .put(START_FOR_OWNER.getCommandName(), new SetChatIdForOwnerCommand(sendMessageService))
+                .put(ORDER_FAVORITE_DRINK.getCommandName(), new OrderFavoriteDrinkCommand(sendMessageService, clientRepository, drinkRepository))
                 .put(HELP.getCommandName(), new HelpCommand(sendMessageService))
                 .put(FEEDBACK.getCommandName(), new FeedbackCommand(sendMessageService))
-                .put(SET_FAVORITE_DRINK.getCommandName(), new SetFavoriteDrinkCommand(sendMessageService, clientRepository))
+                .put(SET_FAVORITE_DRINK.getCommandName(), new SelectFavoriteDrinkCommand(sendMessageService, clientRepository, drinkRepository))
+                .put("/sendOrderToChat", new SendOrderToChatCommand(sendMessageService))
                 .build();
 
         unknownCommand = new UnknownCommand(sendMessageService);
-        setComment = new SetComment(sendMessageService, clientRepository);
+        setComment = new SetCommentCommand(sendMessageService, clientRepository);
 
     }
 
@@ -38,7 +39,7 @@ public class CommandContainer {
         return commandMap.getOrDefault(commandIdentifier, unknownCommand);
     }
 
-
-
-
+    public Command getSetComment() {
+        return setComment;
+    }
 }

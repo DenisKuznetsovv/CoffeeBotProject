@@ -3,11 +3,11 @@ package com.coffeOrderBot.CoffeBot.command.commands;
 import com.coffeOrderBot.CoffeBot.service.SendMessageService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public class StartForOwner implements Command {
+public class SetChatIdForOwnerCommand implements Command {
 
     private final SendMessageService sendMessageService;
 
-    public StartForOwner(SendMessageService sendMessageService) {
+    public SetChatIdForOwnerCommand(SendMessageService sendMessageService) {
         this.sendMessageService = sendMessageService;
     }
 

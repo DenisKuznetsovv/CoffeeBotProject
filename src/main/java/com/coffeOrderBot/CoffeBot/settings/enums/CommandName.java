@@ -1,20 +1,26 @@
 package com.coffeOrderBot.CoffeBot.settings.enums;
 
 public enum CommandName {
-    START("/start"),
-    ORDER_FAVORITE_DRINK("/order"),
-    HELP("/help"),
-    FEEDBACK("/feedback"),
-    SET_FAVORITE_DRINK("/set_favorite_drink"),
-    START_FOR_OWNER("/password");
+    START("/start", "Старт бота"),
+    ORDER_FAVORITE_DRINK("/order", "Заказать любимый напиток"),
+    HELP("/help", "Помощь"),
+    FEEDBACK("/feedback", "Отзывы"),
+    SET_FAVORITE_DRINK("/set_favorite_drink", "Изменить любимый напиток"),
+    START_FOR_OWNER("/password", "Старт для владельца");
 
 
 
     private final String commandName;
+    private final String description;
 
 
-    CommandName(String commandName) {
+    CommandName(String commandName, String description) {
         this.commandName = commandName;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String getCommandName() {

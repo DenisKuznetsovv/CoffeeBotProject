@@ -1,5 +1,7 @@
 package com.coffeOrderBot.CoffeBot.settings;
 
+import com.coffeOrderBot.CoffeBot.model.DrinkMenuRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import static com.coffeOrderBot.CoffeBot.settings.enums.CommandName.*;
@@ -11,6 +13,9 @@ import java.util.List;
 
 
 public class InlineKeyboardMarkupCollection {
+
+    @Autowired
+    private DrinkMenuRepository drinkMenuRepository;
 
     public static InlineKeyboardMarkup setFavoriteDrink() {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
@@ -144,17 +149,5 @@ public class InlineKeyboardMarkupCollection {
         return inlineKeyboardMarkup;
     }
 
-//    public static InlineKeyboardMarkup invoice(){
-//        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-//        List<List<InlineKeyboardButton>> rowsInlineKeyboard = new ArrayList<>();
-//        List<InlineKeyboardButton> row = new ArrayList<>();
-//        InlineKeyboardButton button = new InlineKeyboardButton("Оплатить")
-//
-//        button.setText("Оплатить");
-//        button.setCallbackData("Оплатить");
-//
-//
-//
-//        return
-//    }
+
 }

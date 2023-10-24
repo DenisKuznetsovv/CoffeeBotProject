@@ -43,6 +43,7 @@ public class SendMessageService {
 
     public void setChatIdForOrders(String chatIdForOrders){
         this.chatIdForOrders = chatIdForOrders;
+        System.out.println(chatIdForOrders);
     }
 
     public void sendOrder(String order){
@@ -50,6 +51,14 @@ public class SendMessageService {
         message.setChatId(chatIdForOrders);
         message.enableHtml(true);
         message.setText(order);
+
+        try {
+            bot.execute(message);
+        } catch (TelegramApiException e) {
+            log.warn("Warn from SendMessageServiceImpl:" + e.getMessage());
+            log.warn(e.getStackTrace());
+            e.printStackTrace();
+        }
     }
 
     public void sendMessage(String chatId, String messageText) {
@@ -102,14 +111,10 @@ public class SendMessageService {
     }
 
     @SneakyThrows
-    public void sendInvoice(String chatId, String title, String description, String payload) {
-        List<LabeledPrice> list = List.of(
-                new LabeledPrice("Цена", 14000),
-                new LabeledPrice("Работа сервиса", 500)
-                );
+    public void sendInvoice(String chatId, String title, String description, String payload, List<LabeledPrice> prices) {
 
         SendInvoice invoice = new SendInvoice(chatId, title, description, payload, this.providerToken,"start", "RUB"
-                ,list);
+                ,prices);
         bot.execute(invoice);
     }
 }

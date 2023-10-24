@@ -1,13 +1,14 @@
 package com.coffeOrderBot.CoffeBot.settings.enums;
 
 public enum DrinkButtons {
-    AMERICANO("Американо", "AMERICANO"),
-    CAPPUCCINO("Капучино", "CAPUCHINO"),
-    ESPRESSO("Эспрессо", "ESPRESSO"),
-    LATTE("Латте", "LATTE"),
-    RAF_COFFEE("Раф-кофе", "RAFF"),
-    AUTHOR_DRINKS("Авторские напитки", "AU_DRINKS"),
-    TEA("Чай", "TEA");
+    AMERICANO("Американо", "Americano"),
+    CAPPUCCINO("Капучино", "Capuchino"),
+    ESPRESSO("Эспрессо", "Espresso"),
+    LATTE("Латте", "Latte"),
+    RAF_COFFEE("Раф-кофе", "Raff"),
+    CLASSIC_COFFEE("Классический кофе (Включая кофе на растительном молоке)", "Classic coffee"),
+    AUTHOR_DRINKS("Авторские напитки", "Autor drinks"),
+    TEA("Чай", "tea");
 
 
     private final String buttonText;

@@ -31,16 +31,4 @@ public class ReplyKeyboardMarkupCollection {
         keyboardMarkup.setKeyboard(keyboardRows);
         return keyboardMarkup;
     }
-
-    /*public static List<BotCommand> getMenu(){
-        List<BotCommand> listOfCommands = new ArrayList<>();
-
-        listOfCommands.add(new BotCommand(START.getCommandName(), "Старт бота"));
-        listOfCommands.add(new BotCommand(ORDER_FAVORITE_DRINK.getCommandName(), "Заказать любимый напиток"));
-        listOfCommands.add(new BotCommand(SET_FAVORITE_DRINK.getCommandName(), "Изменить любимый напиток"));
-        listOfCommands.add(new BotCommand(HELP.getCommandName(), "Помощь"));
-
-        return listOfCommands;
-
-    }*/
 }

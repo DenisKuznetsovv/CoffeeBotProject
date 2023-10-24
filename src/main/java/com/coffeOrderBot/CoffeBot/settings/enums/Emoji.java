@@ -7,7 +7,8 @@ public enum Emoji {
     TIMER_CLOCK(EmojiParser.parseToUnicode(":timer_clock:")),
     TEMP(EmojiParser.parseToUnicode(":thermometer:")),
     TIME(EmojiParser.parseToUnicode("⌛")),
-    COFFEE(EmojiParser.parseToUnicode(":coffee:"));
+    COFFEE(EmojiParser.parseToUnicode(":coffee:")),
+    CHECK_MARK_BUTTON(EmojiParser.parseToUnicode(":check_mark_button: "));
 
 
 

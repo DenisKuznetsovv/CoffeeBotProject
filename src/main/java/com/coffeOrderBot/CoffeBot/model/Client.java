@@ -1,27 +1,23 @@
 package com.coffeOrderBot.CoffeBot.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.sql.Timestamp;
 
 
-@Entity(name = "client")
+@Entity(name = "clients")
 @Getter
 @Setter
 @RequiredArgsConstructor
-@ToString
 public class Client {
 
     @Id
-    private Long id;
+    private Long client_id;
 
-    @Column(name = "UserName")
+    @Column(name = "userName")
     private String userName;
 
     @Column(name = "FirstName")
@@ -33,14 +29,21 @@ public class Client {
     @Column(name = "RegisterDay")
     private Timestamp registerDay;
 
-    @Column(name = "Favorite_drink")
-    private String favorite_drink;
+    @ManyToOne()
+    @JoinColumn(name = "syrup_id")
+    private Syrup syrupId;
 
-    @Column(name = "Volume")
-    private String volume;
+    @ManyToOne()
+    @JoinColumn(name = "drink_id")
+    private DrinkMenu drinkId;
 
     @Column(name = "Comment")
     private String comment;
+
+    private String volume;
+
+    private String favorite_drink;
+
 
     public String getOrderInformation(){
         return "Имя: " + firstName + "\n" +

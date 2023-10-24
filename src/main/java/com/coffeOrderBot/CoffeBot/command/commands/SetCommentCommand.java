@@ -11,25 +11,25 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Log4j2
-public class SetComment implements Command {
+public class SetCommentCommand implements Command {
 
-    private ClientRepository repository;
+    private ClientRepository clientRepository;
 
     private final SendMessageService sendMessageService;
 
-    public SetComment(SendMessageService sendMessageService, ClientRepository repository) {
-        this.repository = repository;
+    public SetCommentCommand(SendMessageService sendMessageService, ClientRepository repository) {
+        this.clientRepository = repository;
         this.sendMessageService = sendMessageService;
     }
 
     @Override
     public void execute(Update update) {
         Long chatId = update.getMessage().getChatId();
-        Optional<Client> clientOptional = repository.findById(chatId);
+        Optional<Client> clientOptional = clientRepository.findById(chatId);
         try {
             Client client = clientOptional.get();
             client.setComment(update.getMessage().getText());
-            repository.save(client);
+            clientRepository.save(client);
             sendMessageService.sendMessage(String.valueOf(chatId), "Новый комментарий сохранен");
         } catch (NullPointerException | NoSuchElementException e) {
             e.printStackTrace();

@@ -13,13 +13,13 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Log4j2
-public class SetVolume implements Command {
+public class SetVolumeCommand implements Command {
 
     private ClientRepository repository;
 
     private final SendMessageService sendMessageService;
 
-    public SetVolume(SendMessageService sendMessageService, ClientRepository repository) {
+    public SetVolumeCommand(SendMessageService sendMessageService, ClientRepository repository) {
         this.sendMessageService = sendMessageService;
         this.repository = repository;
     }
