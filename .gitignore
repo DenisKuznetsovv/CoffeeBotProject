@@ -1,1 +1,6 @@
-src\main\resources\*
+application.properties
+bot.properties
+log4j2.xml
+
+/.idea
+
