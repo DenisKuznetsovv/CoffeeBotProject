@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.coffeOrderBot</groupId>
-	<artifactId>CoffeBot</artifactId>
+	<artifactId>CoffeeBot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CoffeeBot</name>
 	<description>Demo project for Spring Boot</description>
